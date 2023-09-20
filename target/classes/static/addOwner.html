@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add New Owner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        form {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        label, input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Add New Owner</h2>
+<form action="/owners" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="phone">Phone Number:</label>
+    <input type="text" id="phone" name="phoneNumber" required><br><br>
+
+    <input type="submit" value="Add Owner">
+</form>
+
+<a href="/">Back to Home</a>
+
+</body>
+</html>
