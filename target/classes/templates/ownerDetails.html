@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Owner Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        form {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        label, input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Owner Details</h2>
+<p><strong>Name:</strong> <span th:text="${owner.name}"></span></p>
+<p><strong>Email:</strong> <span th:text="${owner.email}"></span></p>
+<p><strong>Phone Number:</strong> <span th:text="${owner.phoneNumber}"></span></p>
+
+<h3>Add Pet for this Owner</h3>
+<form action="/pets" method="post">
+    <input type="hidden" name="ownerId" th:value="${owner.id}">
+    <label for="name">Pet Name:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="type">Type:</label>
+    <input type="text" id="type" name="type" required><br><br>
+
+    <input type="submit" value="Add Pet">
+</form>
+
+<a href="/">Back to Home</a>
+
+</body>
+</html>

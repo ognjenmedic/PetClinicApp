@@ -1,6 +1,9 @@
 package com.petclinic.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -15,8 +18,9 @@ public class Visit {
     private Date date;
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pet_id")
+    @JsonBackReference 
     private Pet pet;
 
     public Visit() {

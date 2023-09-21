@@ -1,0 +1,21 @@
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Pet</th>
+            <th>Owner</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="visit : ${visits}">
+            <td th:text="${visit.id}"></td>
+            <td th:text="${visit.date}"></td>
+            <td th:text="${visit.description}"></td>
+            <td th:text="${visit.pet.name}"></td>
+            <td th:text="${visit.pet.owner.name}"></td>
+        </tr>
+    </tbody>
+    <a href="/">Back to Home</a>
+</table>

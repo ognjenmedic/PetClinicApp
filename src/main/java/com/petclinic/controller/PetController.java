@@ -1,23 +1,29 @@
 package com.petclinic.controller;
 
+import com.petclinic.entity.Owner;
 import com.petclinic.entity.Pet;
+import com.petclinic.service.OwnerService;
 import com.petclinic.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/pets")
 public class PetController {
 
     private final PetService petService;
+    private final OwnerService ownerService;  
 
     @Autowired
-    public PetController(PetService petService) {
+    public PetController(PetService petService, OwnerService ownerService) {  
         this.petService = petService;
+        this.ownerService = ownerService;  
     }
 
     @GetMapping
@@ -33,12 +39,26 @@ public class PetController {
     }
 
     @PostMapping
-    public Pet createPet(@RequestParam String name, @RequestParam String type) {
+    public String createPet(@RequestParam String name, @RequestParam String type, @RequestParam Long ownerId, Model model, RedirectAttributes redirectAttributes) {
         Pet pet = new Pet();
         pet.setName(name);
         pet.setType(type);
-        return petService.savePet(pet);
+
+        Optional<Owner> ownerOptional = ownerService.findOwnerById(ownerId);
+        if (ownerOptional.isPresent()) {
+            Owner owner = ownerOptional.get();
+            pet.setOwner(owner);
+            Pet savedPet = petService.savePet(pet);
+
+            model.addAttribute("owner", owner);
+            model.addAttribute("pet", savedPet);
+
+            return "summary"; 
+        } else {
+            return "redirect:/"; 
+        }
     }
+
 
     @PutMapping("/{id}")
     public Pet updatePet(@PathVariable Long id, @RequestBody Pet pet) {

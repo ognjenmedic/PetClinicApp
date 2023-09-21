@@ -34,5 +34,12 @@ public class VisitService {
         visitRepository.delete(visit);
     }
 
-    // Additional business logic can be added here
+    public Visit getVisitByIdWithPetAndOwner(Long id) {
+        return visitRepository.findByIdWithPetAndOwner(id).orElse(null);
+    }
+
+    public List<Visit> findAllVisitsWithDetails() {
+        return visitRepository.findAllWithPetAndOwner();
+    }
+
 }

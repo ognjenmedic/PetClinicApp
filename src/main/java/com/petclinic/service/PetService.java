@@ -26,6 +26,10 @@ public class PetService {
         return petRepository.findById(id);
     }
 
+    public Optional<Pet> findPetByName(String name) {
+        return petRepository.findByName(name);
+    }
+    
     public Pet savePet(Pet pet) {
         return petRepository.save(pet);
     }

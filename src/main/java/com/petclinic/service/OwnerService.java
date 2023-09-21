@@ -25,6 +25,10 @@ public class OwnerService {
     public Optional<Owner> findOwnerById(Long id) {
         return ownerRepository.findById(id);
     }
+    
+    public Optional<Owner> findOwnerByName(String name) {
+        return ownerRepository.findByName(name);
+    }
 
     public Owner saveOwner(Owner owner) {
         return ownerRepository.save(owner);

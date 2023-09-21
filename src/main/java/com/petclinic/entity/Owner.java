@@ -1,6 +1,10 @@
 package com.petclinic.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -18,6 +22,7 @@ public class Owner {
     private String phoneNumber;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<Pet> pets = new HashSet<>();
 
     public Owner() {
@@ -28,6 +33,7 @@ public class Owner {
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
+
 
     public Long getId() {
         return id;

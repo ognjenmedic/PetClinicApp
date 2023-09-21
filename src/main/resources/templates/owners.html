@@ -2,6 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Owners</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        form {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        label, input {
+            margin-bottom: 10px;
+        }
+        /* Remove bullet points from the list */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
 
@@ -14,6 +35,8 @@
             <th>Name</th>
             <th>Email</th>
             <th>Phone Number</th>
+            <th>Pet Name</th> 
+            <th>Pet Type</th> 
         </tr>
     </thead>
     <tbody>
@@ -22,9 +45,20 @@
             <td th:text="${owner.name}"></td>
             <td th:text="${owner.email}"></td>
             <td th:text="${owner.phoneNumber}"></td>
+            <td>
+                <ul>
+                    <li th:each="pet : ${owner.pets}" th:text="${pet.name}"></li>
+                </ul>
+            </td> 
+            <td>
+                <ul>
+                    <li th:each="pet : ${owner.pets}" th:text="${pet.type}"></li>
+                </ul>
+            </td> 
         </tr>
     </tbody>
 </table>
-
+<br>
+<a href="/">Back to Home</a>
 </body>
 </html>

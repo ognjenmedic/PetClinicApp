@@ -1,6 +1,10 @@
 package com.petclinic.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -16,11 +20,13 @@ public class Pet {
     private String name;
     private String type;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id")
+    @JsonBackReference 
     private Owner owner;
 
     @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<Visit> visits = new HashSet<>();
 
     public Pet() {

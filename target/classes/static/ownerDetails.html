@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add New Pet</title>
+    <title>Owner Details</title>
+    <title>Add New Owner</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,13 +21,19 @@
 </head>
 <body>
 
-<h2>Add New Pet</h2>
+<h2>Owner Details</h2>
+<p><strong>Name:</strong> <span th:text="${owner.name}"></span></p>
+<p><strong>Email:</strong> <span th:text="${owner.email}"></span></p>
+<p><strong>Phone Number:</strong> <span th:text="${owner.phoneNumber}"></span></p>
+
+<h3>Add Pet for this Owner</h3>
 <form action="/pets" method="post">
-    <label for="name">Name:</label>
+    <input type="hidden" name="ownerId" th:value="${owner.id}">
+    <label for="name">Pet Name:</label>
     <input type="text" id="name" name="name" required><br>
 
     <label for="type">Type:</label>
-    <input type="text" id="type" name="type" required><br>
+    <input type="text" id="type" name="type" required><br><br>
 
     <input type="submit" value="Add Pet">
 </form>
