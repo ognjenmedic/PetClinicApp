@@ -1,0 +1,13 @@
+com/petclinic/service/OwnerService.class
+com/petclinic/repository/PetRepository.class
+com/petclinic/PetClinicApplication.class
+com/petclinic/repository/VisitRepository.class
+com/petclinic/entity/Pet.class
+com/petclinic/repository/OwnerRepository.class
+com/petclinic/service/VisitService.class
+com/petclinic/service/PetService.class
+com/petclinic/entity/Owner.class
+com/petclinic/controller/PetController.class
+com/petclinic/controller/OwnerController.class
+com/petclinic/entity/Visit.class
+com/petclinic/controller/VisitController.class
