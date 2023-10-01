@@ -1,20 +1,18 @@
 pipeline {
     agent any 
-
+    tools {
+        maven "M3"
+    }
     stages {
-        stage('Checkout') {
+        stage('Compile and Clean') { 
             steps {
-                // Get the code from the version control system.
-                checkout scm
+                // Run Maven on a Unix agent.
+                sh "mvn clean compile"
             }
         }
-        
-        stage('Build Docker Image') {
+        stage('deploy') { 
             steps {
-                script {
-                    // Build the Docker image
-                    sh 'docker build -t ognjen/pet-clinic:latest .'
-                }
+                sh "mvn package"
             }
         }
     }
