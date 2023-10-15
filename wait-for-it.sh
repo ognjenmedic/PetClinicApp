@@ -30,7 +30,8 @@ wait_for()
         echoerr "$WAITFORIT_cmdname: waiting for $WAITFORIT_HOST:$WAITFORIT_PORT without a timeout"
     fi
     WAITFORIT_start_ts=$(date +%s)
-    while :
+i=0    
+while :
     do
         if [[ $WAITFORIT_ISBUSY -eq 1 ]]; then
             nc -z $WAITFORIT_HOST $WAITFORIT_PORT
@@ -44,7 +45,9 @@ wait_for()
             echoerr "$WAITFORIT_cmdname: $WAITFORIT_HOST:$WAITFORIT_PORT is available after $((WAITFORIT_end_ts - WAITFORIT_start_ts)) seconds"
             break
         fi
-        sleep 1
+            i=$((i+1))
+    echo "Attempt: $i"
+    sleep 1
     done
     return $WAITFORIT_result
 }
@@ -136,7 +139,7 @@ if [[ "$WAITFORIT_HOST" == "" || "$WAITFORIT_PORT" == "" ]]; then
     usage
 fi
 
-WAITFORIT_TIMEOUT=${WAITFORIT_TIMEOUT:-15}
+WAITFORIT_TIMEOUT=${WAITFORIT_TIMEOUT:-30}
 WAITFORIT_STRICT=${WAITFORIT_STRICT:-0}
 WAITFORIT_CHILD=${WAITFORIT_CHILD:-0}
 WAITFORIT_QUIET=${WAITFORIT_QUIET:-0}

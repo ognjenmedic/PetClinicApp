@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   mysql-container:
     image: mysql:8
@@ -8,6 +9,8 @@ services:
     ports:
       - 3307:3306
     restart: always
+    networks:
+      - custom_network
 
   springboot-container:
     build: .
@@ -16,5 +19,9 @@ services:
     ports:
       - 9090:8080
     restart: always
+    networks:
+      - custom_network
 
-
+networks:
+  custom_network:
+    driver: bridge
