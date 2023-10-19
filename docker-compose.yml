@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
   mysql-container:
     image: mysql:8
@@ -10,18 +9,27 @@ services:
       - 3307:3306
     restart: always
     networks:
-      - custom_network
-
+      - private
+    volumes:
+      - db:/var/lib/mysql
   springboot-container:
     build: .
+    container_name: springboot-container 
     depends_on:
       - mysql-container
     ports:
-      - 9090:8080
+      - 9090:9090
     restart: always
     networks:
-      - custom_network
+      - public
+      - private
 
 networks:
-  custom_network:
+  public:
+    name: my-public-networks
     driver: bridge
+  private:
+    name: my-private-networks
+volumes:
+  db:
+   driver: local    
